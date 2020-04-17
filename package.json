@@ -1,0 +1,12 @@
+{
+  "name": "unison",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:hektormisplon/unison.git",
+  "author": "Hektor Misplon <hektor.misplon@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "expo-cli": "^3.18.2",
+    "global": "^4.4.0"
+  }
+}
