@@ -1,13 +1,12 @@
 import { Feather as Icon } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import React, { useState } from 'react'
 import { View, Image } from 'react-native'
 
-import HomeScreen from './src/screens/Home'
+import { AppNavigator } from './src/navigation/app.navigator'
 
 const cacheImages = images =>
   images.map(image =>
@@ -28,8 +27,6 @@ const _loadAssetsAsync = async () => {
   await Promise.all([...imageAssets, ...fontAssets])
 }
 
-const Stack = createStackNavigator()
-
 export default () => {
   // render AppLoading until all is loaded
   ;[loading, setLoading] = useState(true)
@@ -41,9 +38,7 @@ export default () => {
     />
   ) : (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
+      <AppNavigator initialRouteName="Auth" />
     </NavigationContainer>
   )
 }
