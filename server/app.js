@@ -1,8 +1,8 @@
 require('dotenv/config')
-const express = require('express'),
-  mongoose = require('mongoose'),
+const cookieParser = require('cookie-parser'),
   cors = require('cors'),
-  cookieParser = require('cookie-parser'),
+  express = require('express'),
+  mongoose = require('mongoose'),
   path = require('path')
 
 /*
@@ -19,11 +19,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-if (app.get('env') === 'development')
+if (app.get('env') === 'development') {
   app.use((err, req, res, next) => {
     res.status(err.status || 500)
     res.render('error', { message: err.message, error: err })
   })
+}
 
 /*
 Connect to mongodb */
