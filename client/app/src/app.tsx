@@ -4,7 +4,7 @@ import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import React, { useState } from 'react'
-import { View, Image } from 'react-native'
+import { Image } from 'react-native'
 
 import { AppNavigator } from './navigation/app.navigator'
 
@@ -18,13 +18,9 @@ const cacheImages = images =>
 const cacheFonts = fonts => fonts.map(font => Font.loadAsync(font))
 
 const _loadAssetsAsync = async () => {
-  const imageAssets = cacheImages([
-    'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-  ])
-
-  const fontAssets = cacheFonts([Icon.font])
-
-  await Promise.all([...imageAssets, ...fontAssets])
+  const images = cacheImages([])
+  const fonts = cacheFonts([Icon.font])
+  await Promise.all([...images, ...fonts])
 }
 
 export const App = () => {
