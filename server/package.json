@@ -7,6 +7,8 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^4.0.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -14,6 +16,12 @@
     "mongoose": "^5.9.10"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3"
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "eslint": "^6.8.0",
+    "eslint-config-universe": "^3.0.0",
+    "nodemon": "^2.0.3",
+    "prettier": "^2.0.5",
+    "typescript": "^3.8.3"
   }
 }
