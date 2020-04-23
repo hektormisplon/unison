@@ -1,6 +1,6 @@
 import { Feather as Icon } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
-import { AppLoading, registerRootComponent } from 'expo'
+import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import React, { useState } from 'react'
@@ -19,7 +19,7 @@ const cacheFonts = fonts => fonts.map(font => Font.loadAsync(font))
 
 const _loadAssetsAsync = async () => {
   const imageAssets = cacheImages([
-    'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
   ])
 
   const fontAssets = cacheFonts([Icon.font])
@@ -42,5 +42,3 @@ export const App = () => {
     </NavigationContainer>
   )
 }
-
-export default registerRootComponent(App)
