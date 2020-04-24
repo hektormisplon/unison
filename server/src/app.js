@@ -23,10 +23,7 @@ app.use(logger)
 /*
 Connect to mongodb */
 
-mongoose
-  .connect(env.MONGO_URI, dbConnection)
-  .then(() => console.info('Connected to database'))
-  .catch(err => console.error(err))
+mongoose.connect(env.MONGO_URI, dbConnection).catch(err => console.error(err))
 
 /*
 Router */
@@ -36,7 +33,7 @@ app.use('/api', apiRouter)
 /*
 Start server */
 
-const server = app.listen(env.PORT, () => {
+const server = app.listen(env.PORT, env.HOST, () => {
   const { address, port } = server.address()
-  console.info(`Listening on | ${address}${port}`)
+  console.info(`[runs on] ${address}:${port}`)
 })
