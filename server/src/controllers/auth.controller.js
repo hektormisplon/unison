@@ -8,11 +8,18 @@ const {
   validateSignin,
 } = require('../validation/auth.validator')
 
+/*
+Validate request & handle validation error */
+
+const handleValidation = data => {
+  const { error } = validateSignup(data)
+  if (error) return res.status(400).send(error.details[0].message)
+}
+
 exports.signup = async (req, res) => {
   const { email, password } = req.body
 
-  const { error } = validateSignup(req.body)
-  if (error) return res.status(400).send(error.details[0].message)
+  handleValidation(req.body)
 
   const user = await User.findOne({ email })
   if (user) return res.status(400).json({ message: 'Email already in use' })
@@ -33,9 +40,7 @@ Sign in */
 exports.signin = async (req, res) => {
   const { email, password } = req.body
 
-  // Handle validation errors
-  const { error } = validateSignin(req.body)
-  if (error) return res.status(400).send(error.details[0].message)
+  handleValidation(req.body)
 
   // Check if user in database
   const user = await User.findOne({ email })
