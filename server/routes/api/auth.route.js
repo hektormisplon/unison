@@ -10,7 +10,7 @@ const initEndpoints = router => {
   /*
 Signup*/
 
-  router.post('/user', async (req, res) => {
+  router.post('/signup', async (req, res) => {
     const { email, password } = req.body
 
     const { error } = validateSignup(req.body)
