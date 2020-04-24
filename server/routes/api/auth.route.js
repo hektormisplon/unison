@@ -38,7 +38,7 @@ Signin */
     const { email, password } = req.body
 
     const { error } = validateSignin(req.body)
-    if (error) return res.status(404).send(error.details[0].message)
+    if (error) return res.status(400).send(error.details[0].message)
 
     // Check if user in database
     const user = await User.findOne({ email })
