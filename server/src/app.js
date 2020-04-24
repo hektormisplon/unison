@@ -1,15 +1,14 @@
 const cookieParser = require('cookie-parser'),
   cors = require('cors'),
   express = require('express'),
-  mongoose = require('mongoose'),
-  path = require('path')
+  mongoose = require('mongoose')
 
 const { env, logger, dbConnection } = require('./config')
 
 /*
 Import routes*/
 
-const apiRouter = require('./routes/api')
+const apiRouter = require('./routes')
 
 /*
 Init Express w/ middleware */
