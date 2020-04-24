@@ -3,10 +3,13 @@ const cookieParser = require('cookie-parser'),
   cors = require('cors'),
   express = require('express'),
   mongoose = require('mongoose'),
-  path = require('path')
+  path = require('path'),
+  pino = require('pino-http')({
+    prettyPrint: { colorize: true },
+  })
 
 /*
-Import routes */
+Import routes*/
 
 const apiRouter = require('./routes/api')
 
@@ -18,13 +21,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-
-if (app.get('env') === 'development') {
-  app.use((err, req, res, next) => {
-    res.status(err.status || 500)
-    res.render('error', { message: err.message, error: err })
-  })
-}
+app.use(pino)
 
 /*
 Connect to mongodb */
@@ -35,7 +32,7 @@ mongoose
     useUnifiedTopology: true,
     useCreateIndex: true,
   })
-  .then(() => console.log('Connected to database'))
+  .then(() => console.info('Connected to database'))
   .catch(err => console.error(err))
 
 /*
@@ -48,5 +45,5 @@ Start server */
 
 const server = app.listen(process.env.NODE_PORT, () => {
   const { address, port } = server.address()
-  console.log(`Listening on | ${address}${port}`)
+  console.info(`Listening on | ${address}${port}`)
 })
