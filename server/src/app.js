@@ -2,10 +2,9 @@ const cookieParser = require('cookie-parser'),
   cors = require('cors'),
   express = require('express'),
   mongoose = require('mongoose'),
-  path = require('path'),
-  config = require('./config'),
-  logger = require('./config/pino')
+  path = require('path')
 
+const { env, logger, dbConnection } = require('./config')
 
 /*
 Import routes*/
@@ -26,11 +25,7 @@ app.use(logger)
 Connect to mongodb */
 
 mongoose
-  .connect(config.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
+  .connect(env.MONGO_URI, dbConnection)
   .then(() => console.info('Connected to database'))
   .catch(err => console.error(err))
 
@@ -42,7 +37,7 @@ app.use('/api', apiRouter)
 /*
 Start server */
 
-const server = app.listen(config.PORT, () => {
+const server = app.listen(env.PORT, () => {
   const { address, port } = server.address()
   console.info(`Listening on | ${address}${port}`)
 })
