@@ -1,4 +1,5 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt'),
+  jwt = require('jsonwebtoken')
 
 const User = require('../../models/user.model')
 const {
@@ -49,7 +50,9 @@ Signin */
     if (!isCorrectPassword)
       return res.status(400).send('Invalid email or password')
 
-    res.json({ message: 'You are signed in' })
+    // Assign jwt
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+    res.header('auth-token', token).json({ token })
   })
 }
 
