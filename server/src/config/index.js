@@ -9,7 +9,7 @@ module.exports.env = {
   HOST: process.env.NODE_HOST,
   MONGO_URI: process.env.MONGO_URI,
   MONGO_PWD: process.env.MONGO_PWD,
-  JWT_TOKEN: process.env.JWT_TOKEN,
+  JWT_SECRET: process.env.JWT_SECRET,
   LOG_LEVEL: process.env.LOG_LEVEL,
 }
 
