@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt'),
-  jwt = require('jsonwebtoken')
+  jwt = require('jsonwebtoken'),
+  config = require('../../config')
 
 const User = require('../../models/user.model')
 const {
@@ -51,7 +52,7 @@ Signin */
       return res.status(400).send('Invalid email or password')
 
     // Assign jwt
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+    const token = jwt.sign({ id: user._id }, config.JWT_SECRET)
     res.header('auth-token', token).json({ token })
   })
 }
