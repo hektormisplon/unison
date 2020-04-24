@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt'),
   jwt = require('jsonwebtoken'),
-  { env } = require('../../config')
+  { env } = require('../config')
 
-const User = require('../../models/user.model')
+const User = require('../models/user.model')
 const {
   validateSignup,
   validateSignin,
-} = require('../../validation/auth.validator')
+} = require('../validation/auth.validator')
 
 const initEndpoints = router => {
   /*
