@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const UserSchema = mongoose.Schema({
   email: {
     type: String,
+    lowercase: true,
     required: true,
     trim: true,
     min: 6,
