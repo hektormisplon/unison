@@ -1,6 +1,6 @@
 require('dotenv/config')
-const logger = require('./pino'),
-  db = require('./db')
+const db = require('./db'),
+  logger = require('./pino')
 
 if (!process.env.NODE_ENV) console.error('.env: Environment not found')
 
