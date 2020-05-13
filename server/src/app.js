@@ -1,9 +1,8 @@
 const cookieParser = require('cookie-parser'),
   cors = require('cors'),
-  express = require('express'),
-  mongoose = require('mongoose')
+  express = require('express')
 
-const { env, logger, dbConnection } = require('./config')
+const { logger } = require('./config')
 
 /*
 Import routes*/
@@ -21,19 +20,8 @@ app.use(cookieParser())
 app.use(logger)
 
 /*
-Connect to mongodb */
-
-mongoose.connect(env.MONGO_URI, dbConnection).catch(err => console.error(err))
-
-/*
 Router */
 
 app.use('/api', apiRouter)
 
-/*
-Start server */
-
-const server = app.listen(env.PORT, env.HOST, () => {
-  const { address, port } = server.address()
-  console.info(`[runs on] ${address}:${port}`)
-})
+module.exports.app = app
