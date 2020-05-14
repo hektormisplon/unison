@@ -6,12 +6,10 @@ const { logger } = require('./config')
 
 /*
 Import routes*/
-
 const apiRouter = require('./routes')
 
 /*
 Init Express w/ middleware */
-
 const app = express()
 app.use(cors())
 app.use(express.json())
@@ -21,7 +19,6 @@ app.use(logger)
 
 /*
 Router */
-
 app.use('/api', apiRouter)
 
 /*
