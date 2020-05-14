@@ -1,11 +1,11 @@
-const userController = require('../controllers/user.controller')
+const controller = require('../controllers/user.controller')
 const auth = require('./auth')
 
 const initEndpoints = router => {
-  router.get('/user', auth, userController.getUsers)
-  router.get('/user:id', auth, userController.getUser)
-  router.delete('/user', auth, userController.deleteUsers)
-  router.delete('/user:id', auth, userController.deleteUser)
+  router.get('/users', auth, controller.getUsers)
+  router.get('/users/:id', auth, controller.getUser)
+  router.delete('/users', auth, controller.deleteUsers)
+  router.delete('/users/:id', auth, controller.deleteUser)
 }
 
 module.exports = initEndpoints
