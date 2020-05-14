@@ -1,6 +1,6 @@
-const cookieParser = require('cookie-parser'),
-  cors = require('cors'),
-  express = require('express')
+const cookieParser = require('cookie-parser')
+const cors = require('cors')
+const express = require('express')
 
 const { logger } = require('./config')
 
