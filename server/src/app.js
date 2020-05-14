@@ -19,6 +19,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(logger)
 
+app.use((req, res, next) => res.status(404).json({ message: 'Not found' }))
+
 /*
 Router */
 
