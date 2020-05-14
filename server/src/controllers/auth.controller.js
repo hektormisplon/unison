@@ -26,9 +26,9 @@ exports.signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt)
 
     user = await new User({ email, password: hashedPassword }).save()
-    res.json({ userId: user._id })
+    res.status(201).json({ userId: user._id })
   } catch (err) {
-    res.status(400).json({ message: err })
+    res.status(500).json({ message: err })
   }
 }
 
@@ -55,6 +55,6 @@ exports.signin = async (req, res) => {
     const token = jwt.sign({ id: user._id }, env.JWT_SECRET)
     res.header('auth-token', token).json({ token })
   } catch (err) {
-    res.status(400).json({ message: err })
+    res.status(500).json({ message: err })
   }
 }

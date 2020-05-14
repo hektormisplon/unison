@@ -11,7 +11,7 @@ exports.createHub = async (req, res) => {
     const hub = await new Hub({ created_by: id, name }).save()
     res.status(201).json({ hub })
   } catch (err) {
-    res.status(400).json(err)
+    res.status(500).json(err)
   }
 }
 
@@ -20,18 +20,18 @@ exports.getHubs = async (req, res) => {
     const hubs = await Hub.find()
     res.json(hubs)
   } catch (err) {
-    res.status(400).json(err)
+    res.status(500).json(err)
   }
 }
 
 exports.getHub = async (req, res) => {
-  res.json({ message: 'getting hub' })
+  res.status(200).json({ message: 'getting hub' })
 }
 
 exports.deleteHubs = async (req, res) => {
-  res.json({ message: 'deleting hubs' })
+  res.status(410).json({ message: 'deleting hubs' })
 }
 
 exports.deleteHub = async (req, res) => {
-  res.json({ message: 'deleting hub' })
+  res.status(410).json({ message: 'deleting hub' })
 }
