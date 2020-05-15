@@ -6,6 +6,7 @@ const logger = require('./pino')
 if (!process.env.NODE_ENV) console.error('.env: Environment not found')
 
 module.exports.env = {
+  NODE_ENV: process.env.NODE_ENV,
   PORT: process.env.NODE_PORT,
   HOST: process.env.NODE_HOST,
   MONGO_URI: process.env.MONGO_URI,
