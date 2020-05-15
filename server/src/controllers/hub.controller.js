@@ -1,32 +1,50 @@
-const jwt = require('jsonwebtoken')
-
-const { env, geocoder } = require('../config')
+const { geocoder } = require('../config')
 const Hub = require('../models/hub.model')
+const { env } = '../config'
 
-exports.createHub = async (req, res) => {
+const addressToGeoJsonPoint = async address => {
+  /* Mock response in development */
+  /* TODO: Remove me */
+  return {
+    type: 'Point',
+    coordinates: [
+      -1.4458572 + Math.random(-0.05, 0.05),
+      51.1576661 + Math.random(-0.05, 0.05),
+    ],
+    formattedAddress: address,
+  }
+  /**/
+
   try {
-    const token = req.header('auth-token')
-    const { id } = jwt.verify(token, env.JWT_SECRET)
-    const { name, address } = req.body
-
-    let location = req.body.location
-
-    if (address) {
-      try {
-        const coords = await geocoder.geocode(address)
-        location = {
-          type: 'Point',
-          coordinates: [coords[0].longitude, coords[0].latitude],
-          formattedAddress: coords[0].formattedAddress,
-        }
-      } catch (err) {
-        res.status(400).json({ message: 'Invalid address' })
-      }
+    const coords = await geocoder.geocode(address)
+    const { longitude, latitude, formattedAddress } = coords[0]
+    return {
+      type: 'Point',
+      coordinates: [longitude, latitude],
+      formattedAddress,
     }
+  } catch (err) {
+    console.error(err)
+  }
+}
 
-    if (!location) return res.status(400).json({ message: 'Invalid location' })
+exports.createHub = async ({ body, user }, res) => {
+  try {
+    const { name, address } = body
+    let { location } = body
 
-    const hub = await new Hub({ created_by: id, name, location }).save()
+    if (address) location = await addressToGeoJsonPoint(address)
+
+    if (!location)
+      return res
+        .status(400)
+        .json({ message: 'Please specify a valid address or location' })
+
+    const hub = await new Hub({
+      created_by: user.id,
+      name,
+      location,
+    }).save()
 
     res.status(201).json({ hub })
   } catch (err) {
