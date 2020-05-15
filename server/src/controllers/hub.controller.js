@@ -43,3 +43,12 @@ exports.deleteHub = async (req, res) => {
     res.status(500).json(err)
   }
 }
+
+exports.deleteHubs = async (req, res) => {
+  try {
+    const hubs = await Hub.deleteMany()
+    res.status(410).json(hubs)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
