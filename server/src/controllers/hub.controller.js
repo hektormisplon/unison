@@ -38,7 +38,7 @@ exports.deleteHub = async (req, res) => {
   try {
     const { id } = req.params
     const hub = await Hub.findByIdAndDelete(id)
-    res.status(410).json({ hub })
+    res.status(410).json(hub)
   } catch (err) {
     res.status(500).json(err)
   }
