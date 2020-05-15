@@ -25,13 +25,21 @@ exports.getHubs = async (req, res) => {
 }
 
 exports.getHub = async (req, res) => {
-  res.status(200).json({ message: 'getting hub' })
-}
-
-exports.deleteHubs = async (req, res) => {
-  res.status(410).json({ message: 'deleting hubs' })
+  try {
+    const { id } = req.params
+    const hub = await Hub.findById(id)
+    res.status(200).json(hub)
+  } catch (err) {
+    res.status(500).json(err)
+  }
 }
 
 exports.deleteHub = async (req, res) => {
-  res.status(410).json({ message: 'deleting hub' })
+  try {
+    const { id } = req.params
+    const hub = await Hub.findByIdAndDelete(id)
+    res.status(410).json({ hub })
+  } catch (err) {
+    res.status(500).json(err)
+  }
 }
