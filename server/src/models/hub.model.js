@@ -8,16 +8,15 @@ const HubSchema = new mongoose.Schema(
       min: 1,
       max: 64,
     },
-    address: {
-      type: String,
-    },
     location: {
       type: {
         type: String,
         enum: ['Point'],
+        required: true,
       },
       coordinates: {
         type: [Number],
+        required: true,
       },
       formattedAddress: String,
     },
