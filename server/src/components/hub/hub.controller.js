@@ -1,6 +1,5 @@
-const { geocoder } = require('../config')
-const Hub = require('../models/hub.model')
-const { env } = '../config'
+const { geocoder } = require('../../config')
+const Hub = require('./hub.model')
 
 const addressToGeoJsonPoint = async address => {
   /* Mock response in development */
@@ -13,7 +12,6 @@ const addressToGeoJsonPoint = async address => {
     ],
     formattedAddress: address,
   }
-  /**/
 
   try {
     const coords = await geocoder.geocode(address)

@@ -1,4 +1,4 @@
-const controller = require('../controllers/auth.controller')
+const controller = require('./auth.controller')
 
 module.exports = router => {
   router.post('/signup', controller.signup)

@@ -1,5 +1,5 @@
-const controller = require('../controllers/user.controller')
-const auth = require('./auth')
+const { auth } = require('../../middlewares')
+const controller = require('./user.controller')
 
 module.exports = router => {
   router.get('/users', auth, controller.getUsers)

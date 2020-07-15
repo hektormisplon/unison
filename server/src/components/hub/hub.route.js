@@ -1,5 +1,5 @@
-const controller = require('../controllers/hub.controller')
-const auth = require('./auth')
+const { auth } = require('../../middlewares')
+const controller = require('./hub.controller')
 
 module.exports = router => {
   router.get('/hubs', auth, controller.getHubs)

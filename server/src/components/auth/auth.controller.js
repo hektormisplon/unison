@@ -1,12 +1,9 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const { env } = require('../config')
-const User = require('../models/user.model')
-const {
-  validateSignup,
-  validateSignin,
-} = require('../validation/auth.validator')
+const { env } = require('../../config')
+const User = require('../user/user.model')
+const { validateSignup, validateSignin } = require('./auth.validator')
 
 /*
 Validate request & handle validation error */
@@ -51,9 +48,10 @@ exports.signin = async (req, res) => {
     if (!isCorrectPassword)
       return res.status(400).json({ message: 'Invalid email or password' })
 
-    // Assign jwt
+    /* Assign jwt */
+    /* TODO: Expiration */
     const token = jwt.sign({ id: user._id }, env.JWT_SECRET)
-    res.header('auth-token', token).json({ token })
+    res.header('Authorization', token).json({ token })
   } catch (err) {
     res.status(500).json({ message: err })
   }
