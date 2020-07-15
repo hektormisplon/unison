@@ -2,11 +2,8 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const express = require('express')
 
+const api = require('./components/index')
 const { logger } = require('./config')
-
-/*
-Import routes*/
-const apiRouter = require('./routes')
 
 /*
 Init Express w/ middleware */
@@ -19,7 +16,7 @@ app.use(logger)
 
 /*
 Router */
-app.use('/api', apiRouter)
+app.use('/api', api)
 
 /*
 Handle 404 & 500 */
