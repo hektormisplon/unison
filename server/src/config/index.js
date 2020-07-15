@@ -10,12 +10,12 @@ module.exports.env = {
   PORT: process.env.NODE_PORT,
   HOST: process.env.NODE_HOST,
   MONGO_URI: process.env.MONGO_URI,
-  MONGO_PWD: process.env.MONGO_PWD,
   JWT_SECRET: process.env.JWT_SECRET,
   LOG_LEVEL: process.env.LOG_LEVEL,
   GEOCODER_PROVIDER: process.env.GEOCODER_PROVIDER,
 }
 
+module.exports.isProd = process.env.NODE_ENV === 'production'
 module.exports.logger = logger
 module.exports.dbConnection = db
 module.exports.geocoder = geocoder
